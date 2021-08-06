@@ -1,0 +1,864 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* لا تدع البادنج والبوردر يؤثروا في الـ width العنصر */
+    box-sizing: border-box;
+}
+
+body {
+    /* height: 5000px; */
+    font-family: "PT Sans",sans-serif;
+}
+
+:root {
+    /* تحديد خامات الالوان */
+    --mainColor:rgb(123, 82, 68);
+    --subColor:#333;
+    --grayColor:rgb(128, 128, 128);
+    
+
+}
+
+.container {
+    width: 80%;
+    margin:auto;
+}
+/* ganeral padding for any section */
+.section-padding{
+    padding: 30px 0;
+}
+/* margin-top-bottom */
+.m-tb-20 {
+    margin: 60px 0;
+}
+/* capitalize text */
+.capitalize{
+    text-transform: capitalize;
+}
+/* hidden-item */
+.hidden-item {
+    visibility: hidden;
+    opacity: 0;
+}
+/* Bollets-div */
+.bollets {
+    text-align: center;
+    transition: opacity .5s;
+}
+.bollets span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 30px 3px 0;
+    transition: transform .2s;
+
+}
+.bollets span:hover {
+     transform: scale(1.2,1.2); 
+}
+.bollets span:first-child{
+    background: var(--subColor);
+}
+.bollets span:last-child {
+    background: var(--mainColor);
+}
+/* just for slider of images in main page */
+.bollets-slider {
+    position: absolute;
+    left:50%;
+    top:95%;
+    transform: translate(-50%,-95%);
+
+}
+
+/* for section title */
+.section-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.section-header .section-title {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.section-header .line {
+    display: block;
+    margin:auto;
+    width: 100px;
+    height: 3px;
+    background-color: var(--mainColor);
+    transition: width .5s;
+}
+.section-header:hover .line {
+    width: 150px;
+}
+/* لازالة ستايل اي ul سوف نستخدمة اكثر من مكان */
+.list-unstyled {
+    list-style: none;
+}
+
+/* Header */
+ header {
+     padding: 30px 0;
+ }
+ header .header-content {
+    display: flex;
+    justify-content: space-between;
+    /* اهم شي سوف يوسط جميع العناصر عاموديا على نفس النقطة */
+    align-items: center;
+}
+a {
+    text-decoration: none;
+}
+/* center any li block elment in horizontal center */
+.header-content ul li {
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+.header-content ul li,
+.header-content ul li a {
+    color : var(--subColor);
+}
+
+/* part1-logo */
+.header-content img{
+ flex:1;
+ max-width:170px;
+}
+/* .End part1-logo */
+
+
+/* part2-navbar */
+.header-content .navbar {
+    flex: 3;
+    text-align: center;
+}
+.header-content .navbar ul li .link-item {
+    display: inline-block;
+    font-weight: bold;
+    padding: 10px 24px;
+    position: relative;
+}
+.header-content .navbar ul li .link-item::before,
+.header-content .navbar ul li .link-item::after {
+    position: absolute;
+    content: "";
+    /* top right bottom left */
+    border-color: var(--mainColor);
+    border-style: solid;
+    top: 0;
+    left: 0;
+    transition: transform .2s;
+}
+.header-content .navbar ul li .link-item::before { 
+    border-width: 0 2px;
+    width: 98%;
+    height: 100%;
+    /* for hide left right border use scale3d(x,y,z=>لكي يستقر بدون اهتزاز)*/
+    transform: scale3d(1,0,1);
+}
+
+.header-content .navbar ul li .link-item:hover::before{
+    transform: scale3d(1, 1, 1);
+    transform-origin: bottom;
+}
+
+.header-content .navbar ul li .link-item::after { 
+    border-width: 2px 0;
+    width: 100%;
+    height: 91%;
+    /* for hide left right border use scale3d(x,y,z=>لكي يستقر بدون اهتزاز)*/
+    transform: scale3d(0, 1, 1);
+    /* transform form left to right */
+    transform-origin: left;
+}
+
+.header-content .navbar ul li .link-item:hover::after {
+    transform: scale3d(1, 1, 1);
+    transition-delay: .4s;
+}
+
+
+/* .End part2-navbar */
+
+
+/* part3-login */
+.header-content .login {
+ flex:1;
+ text-align: right;
+}
+.header-content .login ul li {
+    font-weight: bold;
+    padding: 10px;
+}
+
+
+.header-content .login ul li:last-child i{
+   position: relative;
+   padding-right: 10px;
+}
+
+.header-content .login ul li i:last-child {
+    position: relative;
+    padding-right: 10px;
+}
+.header-content .login ul li:last-child i:after {
+    position: absolute;
+    content: "0";
+    bottom: 0px;
+    right: 4px;
+    width: 11px;
+    height: 11px;
+    background-color: var(--mainColor);
+    color: #FFF;
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 11px;
+    /* h-center */
+    text-align: center;
+    /* v-center */
+    margin: auto;
+}
+/* .End part3-login */
+
+/* .End Header */
+/*-------------------------------------------------------*/
+/* dropdown */
+    .dropdown,
+    .dropdown-2 {
+        position: relative;
+    }
+
+    .dropdown-menu,
+    .dropdown-menu-2 {
+        position: absolute;
+        background: #FFF;
+        border: 2px solid var(--mainColor);
+        padding: 5px;
+        margin-top: 10px;
+        /* for hide list */
+        transform: scale(0);
+        /* لازالة الرجفة عند التاشير */
+        visibility: hidden;
+        opacity: 0;
+        transition: transform .5s,
+        visibility .5s;
+    }
+    .dropdown-menu {
+        width: 370px;
+    }
+    .dropdown:hover .dropdown-menu,
+    .dropdown-2:hover .dropdown-menu-2 {
+        /* to show list */
+        transform: scale(1);
+        transform-origin: top left; 
+        visibility: visible;
+        opacity: 1;
+        z-index: 10;
+    }
+    .dropdown-menu ul {
+         display: table-cell;
+    }
+    .dropdown-menu ul,
+    .dropdown-menu-2 ul {
+        text-align: left;
+        padding: 5px;
+        
+    }
+   
+    .dropdown-menu ul li:first-child a {
+        
+        border-bottom: 1px solid var(--mainColor); 
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .dropdown-menu ul li ,
+    .dropdown-menu-2 ul li {
+        line-height: 1.7;
+        padding: 5px;
+    }
+
+/* .End dropdown */
+/*-------------------------------------------------------*/
+/* Slider */
+.slider {
+    position: relative;
+    
+}
+
+.slider:hover .bollets {
+    visibility: visible;
+    opacity: 1;
+}
+section.slider .image-slider img {
+    width: 100%;
+}
+/* .End Slider */
+/*-------------------------------------------------------*/
+/* Category-Section */
+.category-items {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-column-gap:10px;
+    position: relative;
+    
+}
+.category-items .slider-change {
+      visibility: visible;
+      opacity: 1;
+  }
+
+.category-item img {
+    width: 100%;
+}
+
+.category-item-subtitle{
+    font-weight: normal;
+    color: var(--grayColor);
+    
+}
+.category-item-title {
+    /* font-size: 30px; */
+}
+.category-item {
+    position: relative;
+}
+.category-item .icon {
+ position: absolute;
+ width: 40px;
+ height: 40px;
+ color:#FFF;
+ background-color: var(--mainColor);
+ /* horizontal alin */
+ text-align: center;
+ /* vertical algin */
+ line-height: 40px;
+ bottom: 0;
+ right: 0;
+ opacity: 0;
+ visibility: hidden;
+ transition: opacity .5s;
+}
+
+.category-item:hover .icon {
+  opacity: 1;
+  visibility: visible;
+}
+/*-------------------------------------------------------*/
+/* discount */
+  .discount {
+      display: grid;
+      grid-template-columns: 50% 25% 25%;
+      
+  }
+
+  .discount-desc {
+   background-color: #F7F3EF;
+   padding: 20px;
+   position: relative;
+    
+  }
+
+  .discount-desc .top {
+     margin-bottom: 25px; 
+     padding-left: 60px;
+     position: relative;
+
+      
+  }
+  .discount-desc .top .icon {
+      position: absolute;
+      left:0px;
+      top:0px;
+      font-size: 50px;
+      color: var(--mainColor);
+      
+  }
+  .discount-desc .descount-title {
+    
+  }
+
+  .discount-desc .discount-subtitle {
+      color: var(--grayColor);
+  }
+  .discount-item {
+    margin-left: 20px;
+  }
+.discount-desc .top + p {
+    line-height: 1.7;
+    color: var(--grayColor);
+}
+
+.discount-desc .dash-bollets,
+.event-info .dash-bollets {
+ position: absolute;
+ right: 10px;
+ bottom: 20px;
+
+}
+
+.discount-desc .dash-bollets span,
+.event-info .dash-bollets span {
+    display: inline-block;
+    height: 3px;
+    width: 50px;
+    background-color: var(--mainColor);
+    margin-left: 10px;
+    transition: background-color .3s;
+}
+.discount-desc .dash-bollets span:hover,
+.event-info .dash-bollets span:hover {
+    background-color:var(--subColor)
+}
+
+.discount-item {
+    position: relative;
+    transition: transform .2s;
+    /* لازالة اي حافة زايدة عند عمل هوفر وزوم */
+    overflow: hidden;
+}
+.discount-item .bg-image {
+   height: 100%;
+}
+.discount-item .bg-image img {
+    width: 100%;
+    height: 100%;
+    /* smoother zoom */
+    transition: transform .3s;
+    
+}
+ .discount-item:hover .bg-image img {
+    transform: scale(1.1);
+}
+ .discount-item  .discount-item-info {
+    position: absolute;
+    top: 20px;
+    left: 15px; 
+}
+.discount-item-info h3 {
+    font-weight: normal;
+    color : var(--mainColor)
+}
+.discount-item-info h2 {
+ font-size: 20px;
+}
+/*-------------------------------------------------------*/
+/* sprites */
+
+.sprites {
+  display: flex;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sprites .sprite-item { 
+    flex: 1;
+    border-right: 2px solid rgba(123, 82, 68, .2);
+   
+}
+.sprites .sprite-item:last-child {
+    /* لازالة البوردر من اخر عنصر */
+    border-right: 0;
+}
+.sprite-icon {
+ height: 55px;   
+ background-image: url(/images/service-icon.png);
+ background-repeat: no-repeat;
+ margin-bottom: 10px;
+ transition: all .5s;
+}
+.sprite-icon-1 {
+    background-position: center 5px;
+}
+
+.sprite-item:hover .sprite-icon-1 {
+    background-position: center -90px;
+}
+.sprite-icon-2 {
+    background-position: center -180px;
+}
+
+.sprite-item:hover .sprite-icon-2 {
+    background-position: center -273px;
+}
+
+.sprite-icon-3 {
+    background-position: center -366px;
+}
+
+.sprite-item:hover .sprite-icon-3 {
+    background-position: center -455px;
+}
+
+.sprite-icon-4 {
+    background-position: center -549px;
+}
+
+.sprite-item:hover .sprite-icon-4 {
+    background-position: center -639px;
+}
+
+.sprite-icon-5 {
+    background-position: center -734px;
+}
+
+.sprite-item:hover .sprite-icon-5 {
+    background-position: center -826px;
+}
+
+
+.sprite-info h3 {
+    font-size: 17px;
+}
+
+.sprite-info span {
+    color: var(--grayColor);
+}
+
+/*-------------------------------------------------------*/
+/* products-section */
+ .products {
+
+ }
+
+ .products .list-products {
+     display: flex;
+     justify-content: center;
+     margin-bottom: 20px;
+ }
+
+  .products .list-products li {
+      margin: 15px;
+  }
+
+   .products .list-products li a {
+       color: var(--subColor);
+       font-weight: bold;
+   }
+
+   .products .products-items {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-column-gap :20px;
+    margin: 30px 0;
+   }
+   /* الطبقة الاولى */
+   .product-item {
+    margin-bottom: 20px;
+   }
+
+   .product-img {
+    position: relative;
+   }
+   .product-img img {
+       width: 100%;
+   }
+   /*  الطبقة المخفية وجعلها فوق الاصلية بالمظبوط  */
+   .product-overlay {
+    position: absolute;
+     top: 0;
+    left:0; 
+    width: 100%;
+    height: 100%;
+    /* لاخفاء الطبقة بالسكيل نعطيه القيمة 0 */
+    transform: scaleX(0);
+    opacity: 0;
+    transition: transform .3s , opacity .3s;
+   }
+   
+   /* لاظهار الطبقة المخفية على بصورة فتحة كتاب */
+   .product-item:hover .product-overlay {
+       transform: scaleX(1);
+       opacity: 1;
+   }
+   /* توسيط الايقونات في وسط القائمة*/
+   .product-overlay ul {
+     position: absolute;
+     top:50%;
+     left: 50%;
+     transform: translate(-50%,-50%);
+   }
+   .product-overlay ul li{
+    width: 40px;
+    height: 40px;
+    background-color: var(--mainColor);
+    display: inline-block;
+    text-align: center;
+   }
+  .product-overlay ul li a i{
+    color: #FFF;
+     line-height: 40px;
+  }
+ 
+/* product-info */
+.product-info {
+   
+}
+.product-info .star-rating {
+    margin-top: 10px;
+
+}
+
+.star-rating i.active {
+    color:#eeaf26;
+}
+.product-info span {
+    display: block;
+    margin: 5px 0;
+}
+.product-info h3 {
+    font-size: 15px;
+}
+
+/* events */
+.events {
+display: grid;
+grid-column-gap: 20px;
+}
+.events .event-img {
+    /* عنصر الصورة ياخذ من الخط العمودي الاول الى الرابع */
+    grid-column: 1/4;
+}
+.event-info {
+  /* عنصر الصورة ياخذ من الخط العمودي الاول الى الرابع */
+  grid-column: 4/12;
+  background-color: #F7F3EF;
+  padding: 20px;
+}
+
+.event-info .top {
+    margin-bottom: 40px;
+    padding-left: 60px;
+    position: relative;
+}
+.event-info .top h2{
+    position: absolute;
+    top:0px;
+    left:0px;
+    color : var(--mainColor);
+    font-size: 20px;
+    
+}
+
+.event-info .top h3 {
+    font-size: 17px;
+}
+
+.event-info .top span {
+    position: absolute;
+    display: block;
+    top:35px;
+    left:0px;
+    color : var(--mainColor);
+    font-weight: bold;
+}
+
+.events .event-img {
+    position: relative;
+}
+
+.events .event-img .play-img {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top : 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+   
+}
+
+
+.events .event-img img{
+    width: 100%;
+    height: 100%;
+}
+
+.event-desc p {
+    line-height: 1.7;
+    color : var(--mainColor);
+}
+
+
+.event-info {
+    /* مشترك بنفس الصفات مع 
+.discount-desc .dash-bollets 
+.discount-desc .dash-bollets span:hover
+*/
+
+    position: relative;
+}
+
+.event-info p {
+    margin-bottom: 30px;
+}
+.event-info .dash-bollets {
+    /* مشترك بنفس صفات 
+    .discount-desc .dash-bollets span
+    ولكن الاختلاف فقط في قيمة موقع الاسفل 
+    */
+}
+
+
+/* Brands */
+
+.brands {
+    
+     display: flex; 
+    margin: 40px 0;
+    text-align: center;
+}
+.brand-item {
+ flex: 1; 
+}
+
+.brand-item .brand-item-1 {
+    height: 55px;
+    background-image: url(/images/client1.png);
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+}
+ 
+/*-------------------------------------------------------*/
+
+/* Footer */
+.footer {
+    background-color: var(--subColor);
+    color :#FFF;
+     padding: 80px 0 40px 0; 
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 30% 20% 20% 30%; 
+     grid-column-gap: 20px; 
+}
+.footer-item-1 {
+    padding-right: 20px;
+}
+.footer-item-1 .logo {
+    margin-bottom: 40px;
+}
+
+.footer-item-1 p {
+    line-height: 1.7;
+    color: var(--grayColor);
+    margin-bottom: 40px;
+}
+
+.footer-item-1 .download-app {
+    margin-bottom: 40px;
+}
+
+.footer-item-2 h3,
+.footer-item-3 h3,
+.footer-item-4 h3 {
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+.footer-item-2 li,
+.footer-item-3 li {
+    margin-bottom: 15px;
+}
+.footer-item-2 li a,
+.footer-item-3 li a {
+    color :var(--grayColor);
+    transition: color .3s;
+}
+
+.footer-item-2 li a:hover,
+.footer-item-3 li a:hover {
+    color: #FFF
+}
+
+.footer-item-4 .form-content {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-column-gap: 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, .3);
+    width: 60%;
+    padding-bottom: 5px;
+}
+
+.form-item-1 input {
+    width: 220px;
+    font-size: 15px;
+}
+
+.form-item-1 input:focus{
+    outline: none;
+}
+
+.form-item-1 input,
+.form-item-2 input {
+    border: none;
+    background-color : var(--subColor);
+    padding: 3px;
+    color:#FFF;
+}
+
+.form-item-2 .btn {
+  background: none;
+  width: 40px; 
+  height: 20px;
+  border: none;
+}
+
+.form-item-2 .btn i {
+    color:var(--grayColor);
+    transition: color .3s;
+}
+
+.form-item-2 .btn i:hover{
+    color : #FFF
+}
+
+.footer-item-4 .social {
+    padding-top: 50px;
+}
+
+.footer-item-4 .social li {
+    display: inline-block;
+    margin: 0 8px;
+}
+/*-------------------------------------------------------*/
+/* developer-info */
+
+.company-info {
+    border-top :1px solid rgba(128, 128, 128,.3);
+    padding-top: 5px;  
+}
+
+.company-info-content {
+     display: flex;
+     
+}
+
+.company-info span {
+    display: block;
+    color: var(--grayColor);
+    flex:1;
+    
+}
+.company-info .pay-info {
+  flex:1;
+  text-align: right;
+
+}
+.company-info .pay-info li {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.company-info .pay-info li a i,
+.footer-item-4 .social li a i {
+    color: var(--grayColor);
+    transition: all .3s;
+}
+
+.company-info .pay-info li a i:hover,
+.footer-item-4 .social li a i:hover {
+    color: #fff;
+}
